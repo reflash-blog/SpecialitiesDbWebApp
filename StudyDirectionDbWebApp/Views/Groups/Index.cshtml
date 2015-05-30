@@ -1,0 +1,42 @@
+﻿@model IEnumerable<StudyDirectionDbWebApp.Models.Group>
+
+@{
+    ViewBag.Title = "Список";
+}
+
+
+<p>
+    @Html.ActionLink("Добавить", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Номер группы")
+        </th>
+        <th>
+            @Html.DisplayName("Направление подготовки")
+        </th>
+        <th>
+            @Html.DisplayName("Форма подготовки")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudyDirection.StudyDirectionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudyForm.Form)
+        </td>
+        <td>
+            @Html.ActionLink("Подробнее", "Details", new {id = item.GroupId}, new {@class = "btn btn-default"})
+        </td>
+    </tr>
+}
+
+</table>

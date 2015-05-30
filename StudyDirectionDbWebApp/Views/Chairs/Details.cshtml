@@ -1,0 +1,31 @@
+﻿@model StudyDirectionDbWebApp.Models.Chair
+
+@{
+    ViewBag.Title = "Подробнее";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Название")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChairName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Факультет")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Faculty.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.ChairId }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-primary" })
+</p>

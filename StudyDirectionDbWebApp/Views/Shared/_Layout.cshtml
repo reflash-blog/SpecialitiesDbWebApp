@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+
+    <title>@ViewBag.Title – Каталог специальностей</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="container-fluid expanded-panel">
+        <div class="row">
+            <div id="logo" class="col-xs-12 col-sm-2">
+                <a href="@Url.Action("Index","Home")">Специальности</a>
+            </div>
+            <div id="top-panel" class="col-xs-12 col-sm-10">
+                <div class="row">
+                    <div class="col-xs-8 col-sm-4">
+                        <a href="#" class="show-sidebar">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div id="search">
+                            <input type="text" placeholder="search"/>
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-8 top-panel-right">
+                        <ul class="nav navbar-nav pull-right panel-menu">
+                            <li class="hidden-xs">
+                                <a href="@Url.Action("Index", "Home")" class="modal-link">
+
+                                </a>
+                            </li>
+                            <li class="hidden-xs">
+                                <a href="@Url.Action("Index", "Calendar")">
+                                    <i class="fa fa-calendar"></i>
+                                    <span class="badge">0</span>
+                                </a>
+                            </li>
+                            
+
+                            @Html.Partial("LastQueries")
+                            @Html.Partial("_LoginPartial")
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <!--Start Container-->
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div id="sidebar-left" class="col-xs-2 col-sm-2">
+                <ul class="nav main-menu">
+                    <li>
+                        <a href="@Url.Action("Index","Home")">
+                            <i class="fa fa-dashboard"></i>
+                            <span class="hidden-xs">Основная панель</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa fa-table"></i>
+                            <span class="hidden-xs">Таблицы</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "Faculties")">Факультеты</a></li>
+                            <li><a href="@Url.Action("Index", "Chairs")">Кафедры</a></li>
+                            <li><a href="@Url.Action("Index", "Specialities")">Специальности</a></li>
+                            <li><a href="@Url.Action("Index", "StudyDirections")">Направления подготовки</a></li>
+                            <li><a href="@Url.Action("Index", "StudyForms")">Формы подготовки</a></li>
+                            <li><a href="@Url.Action("Index", "Groups")">Группы</a></li>
+                            <li><a href="@Url.Action("Index", "Students")">Студенты</a></li>
+                        </ul>
+                    </li>
+                    
+
+                </ul>
+            </div>
+            <!--Start Content-->
+            <div id="content" class="col-xs-12 col-sm-10">
+                <!--Start Breadcrumb-->
+                <div class="row">
+                    <div id="breadcrumb" class="col-xs-12">
+                        <ol class="breadcrumb">
+                            <li>@Html.ActionLink("Основная панель", "Index", "Home")</li>
+                            @if (ViewBag.Controller != null && ViewBag.Title != null)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index",ViewBag.Controller)">@ViewBag.Controller</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action(ViewBag.Title, ViewBag.Controller)">@ViewBag.Title</a>
+                                </li>
+                            }
+                        </ol>
+                    </div>
+                </div>
+                <!--End Breadcrumb-->
+                @RenderBody()
+            </div>
+            <!--End Content-->
+        </div>
+    </div>
+    <!--End Container-->
+
+
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/devoops")
+@Scripts.Render("~/bundles/bootstrap")
+
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

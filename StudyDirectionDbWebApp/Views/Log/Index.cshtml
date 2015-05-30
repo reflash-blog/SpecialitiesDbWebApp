@@ -1,0 +1,68 @@
+﻿@using StudyDirectionDbWebApp.Models
+@{
+    const int messagesPerPage = 25;
+    var db = new StudyDirectionDbEntities1();
+    int page = ViewBag.Page;
+    int skippedMessages = (page - 1) * messagesPerPage;
+    var lastId = db.Logs.OrderByDescending(x => x.LogId).First().LogId;
+    LoggerInfoAdapter.Set(new LoggerInfo{LastId = lastId}, Server.MapPath("~/App_Data/loggerInfo.json"));
+}
+
+@foreach (var log in db.Logs.OrderByDescending(x => x.LogId).Skip(skippedMessages).Take(messagesPerPage))
+{
+    <div>
+        <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span>@log.Message</span>
+        </a>
+    </div>
+}
+
+<ul class="pagination">
+    <li class="prev ">
+        @if (page > 1)
+        {
+            @Html.ActionLink("← Предыдущая", "Index", "Log", new {page = (page - 1)}, null)
+        }
+        else
+        {
+            @Html.ActionLink("← Предыдущая", "Index", "Log", new {page = 1}, null)
+        }
+
+    </li>
+    @{
+        int currentPage;
+    }
+    @for (currentPage = 1; currentPage < db.Logs.Count() / messagesPerPage; currentPage++)
+    {
+        if (currentPage == page)
+        {
+            <li class="active">
+                @Html.ActionLink(currentPage.ToString(), "Index", "Log")
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink(currentPage.ToString(), "Index", "Log", new { page = currentPage }, null)
+            </li>
+        }
+
+    }
+
+    @{
+        int lastPage = currentPage - 1;
+    }
+
+    <li class="next">
+        @if (page <= lastPage)
+        {
+            @Html.ActionLink("Следующая →", "Index", "Log", new { page = (page + 1) }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Следующая →", "Index", "Log", new { page = lastPage }, null)
+        }
+    </li>
+</ul>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8bee15bcfd574ea5b5187652f8789a5c" Name="Diagram1">
+        <EntityTypeShape EntityType="StudyDirectionDbModel.Log" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="StudyDirectionDbModel.Chair" Width="1.5" PointX="5.625" PointY="1.625" />
+        <EntityTypeShape EntityType="StudyDirectionDbModel.Faculty" Width="1.5" PointX="3.375" PointY="1.875" />
+        <EntityTypeShape EntityType="StudyDirectionDbModel.Group" Width="1.5" PointX="12.375" PointY="1.25" />
+        <EntityTypeShape EntityType="StudyDirectionDbModel.Speciality" Width="1.5" PointX="7.875" PointY="1.625" />
+        <EntityTypeShape EntityType="StudyDirectionDbModel.Student" Width="1.5" PointX="14.625" PointY="1" />
+        <EntityTypeShape EntityType="StudyDirectionDbModel.StudyDirection" Width="1.5" PointX="10.125" PointY="1.5" />
+        <EntityTypeShape EntityType="StudyDirectionDbModel.StudyForm" Width="1.5" PointX="10.125" PointY="6" />
+        <AssociationConnector Association="StudyDirectionDbModel.Relationship1" />
+        <AssociationConnector Association="StudyDirectionDbModel.Relationship2" />
+        <AssociationConnector Association="StudyDirectionDbModel.Relationship4" />
+        <AssociationConnector Association="StudyDirectionDbModel.Relationship5" />
+        <AssociationConnector Association="StudyDirectionDbModel.Relationship6" />
+        <AssociationConnector Association="StudyDirectionDbModel.Relationship3" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

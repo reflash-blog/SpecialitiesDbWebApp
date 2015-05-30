@@ -1,0 +1,38 @@
+﻿@model IEnumerable<StudyDirectionDbWebApp.Models.Speciality>
+
+@{
+    ViewBag.Title = "Список";
+}
+
+
+<p>
+    @Html.ActionLink("Добавить", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Название")
+        </th>
+        <th>
+            @Html.DisplayName("Название кафедры")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chair.ChairName)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id = item.SpecialityId }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Подробнее", "Details", new { id = item.SpecialityId }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Удалить", "Delete", new { id = item.SpecialityId }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>

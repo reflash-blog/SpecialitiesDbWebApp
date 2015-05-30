@@ -1,0 +1,38 @@
+﻿@model StudyDirectionDbWebApp.Models.Speciality
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+
+<h3>Вы уверены, что хотите удалить специальность?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Название")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Название кафедры")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chair.ChairName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" />
+            @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>

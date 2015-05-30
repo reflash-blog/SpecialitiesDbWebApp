@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище StudyDirectionDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chair">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+          </Key>
+          <Property Name="FacultyId" Type="int" Nullable="false" />
+          <Property Name="ChairId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChairName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+            <PropertyRef Name="DirectionId" />
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="Form" />
+          </Key>
+          <Property Name="FacultyId" Type="int" Nullable="false" />
+          <Property Name="ChairId" Type="int" Nullable="false" />
+          <Property Name="SpecialityId" Type="int" Nullable="false" />
+          <Property Name="DirectionId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Form" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+          </Key>
+          <Property Name="FacultyId" Type="int" Nullable="false" />
+          <Property Name="ChairId" Type="int" Nullable="false" />
+          <Property Name="SpecialityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecialityName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+            <PropertyRef Name="DirectionId" />
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="StudentBookId" />
+            <PropertyRef Name="Form" />
+          </Key>
+          <Property Name="FacultyId" Type="int" Nullable="false" />
+          <Property Name="ChairId" Type="int" Nullable="false" />
+          <Property Name="SpecialityId" Type="int" Nullable="false" />
+          <Property Name="DirectionId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="StudentBookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="AverageMark" Type="int" />
+          <Property Name="Form" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudyDirection">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+            <PropertyRef Name="DirectionId" />
+          </Key>
+          <Property Name="FacultyId" Type="int" Nullable="false" />
+          <Property Name="ChairId" Type="int" Nullable="false" />
+          <Property Name="SpecialityId" Type="int" Nullable="false" />
+          <Property Name="DirectionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudyDirectionName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudyForm">
+          <Key>
+            <PropertyRef Name="Form" />
+          </Key>
+          <Property Name="Form" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="Relationship1">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Chair" Type="Self.Chair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Chair">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship2">
+          <End Role="Chair" Type="Self.Chair" Multiplicity="1" />
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chair">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+            </Principal>
+            <Dependent Role="Speciality">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship3">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="StudyDirection" Type="Self.StudyDirection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+            </Principal>
+            <Dependent Role="StudyDirection">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship4">
+          <End Role="StudyDirection" Type="Self.StudyDirection" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyDirection">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship5">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+              <PropertyRef Name="GroupId" />
+              <PropertyRef Name="Form" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+              <PropertyRef Name="GroupId" />
+              <PropertyRef Name="Form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship6">
+          <End Role="StudyForm" Type="Self.StudyForm" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyForm">
+              <PropertyRef Name="Form" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="Form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище StudyDirectionDbModelContainer">
+          <EntitySet Name="Chair" EntityType="Self.Chair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudyDirection" EntityType="Self.StudyDirection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudyForm" EntityType="Self.StudyForm" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Relationship1" Association="Self.Relationship1">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Chair" EntitySet="Chair" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship2" Association="Self.Relationship2">
+            <End Role="Chair" EntitySet="Chair" />
+            <End Role="Speciality" EntitySet="Speciality" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship3" Association="Self.Relationship3">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="StudyDirection" EntitySet="StudyDirection" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship4" Association="Self.Relationship4">
+            <End Role="StudyDirection" EntitySet="StudyDirection" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship5" Association="Self.Relationship5">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship6" Association="Self.Relationship6">
+            <End Role="StudyForm" EntitySet="StudyForm" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudyDirectionDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StudyDirectionDbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Logs" EntityType="StudyDirectionDbModel.Log" />
+          <EntitySet Name="Chairs" EntityType="StudyDirectionDbModel.Chair" />
+          <EntitySet Name="Faculties" EntityType="StudyDirectionDbModel.Faculty" />
+          <EntitySet Name="Groups" EntityType="StudyDirectionDbModel.Group" />
+          <EntitySet Name="Specialities" EntityType="StudyDirectionDbModel.Speciality" />
+          <EntitySet Name="Students" EntityType="StudyDirectionDbModel.Student" />
+          <EntitySet Name="StudyDirections" EntityType="StudyDirectionDbModel.StudyDirection" />
+          <EntitySet Name="StudyForms" EntityType="StudyDirectionDbModel.StudyForm" />
+          <AssociationSet Name="Relationship1" Association="StudyDirectionDbModel.Relationship1">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Chair" EntitySet="Chairs" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship2" Association="StudyDirectionDbModel.Relationship2">
+            <End Role="Chair" EntitySet="Chairs" />
+            <End Role="Speciality" EntitySet="Specialities" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship4" Association="StudyDirectionDbModel.Relationship4">
+            <End Role="StudyDirection" EntitySet="StudyDirections" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship5" Association="StudyDirectionDbModel.Relationship5">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship6" Association="StudyDirectionDbModel.Relationship6">
+            <End Role="StudyForm" EntitySet="StudyForms" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="Relationship3" Association="StudyDirectionDbModel.Relationship3">
+            <End Role="Speciality" EntitySet="Specialities" />
+            <End Role="StudyDirection" EntitySet="StudyDirections" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Chair">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+          </Key>
+          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="ChairId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChairName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Faculty" Relationship="StudyDirectionDbModel.Relationship1" FromRole="Chair" ToRole="Faculty" />
+          <NavigationProperty Name="Specialities" Relationship="StudyDirectionDbModel.Relationship2" FromRole="Chair" ToRole="Speciality" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chairs" Relationship="StudyDirectionDbModel.Relationship1" FromRole="Faculty" ToRole="Chair" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+            <PropertyRef Name="DirectionId" />
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="Form" />
+          </Key>
+          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="ChairId" Type="Int32" Nullable="false" />
+          <Property Name="SpecialityId" Type="Int32" Nullable="false" />
+          <Property Name="DirectionId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Form" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StudyDirection" Relationship="StudyDirectionDbModel.Relationship4" FromRole="Group" ToRole="StudyDirection" />
+          <NavigationProperty Name="Students" Relationship="StudyDirectionDbModel.Relationship5" FromRole="Group" ToRole="Student" />
+          <NavigationProperty Name="StudyForm" Relationship="StudyDirectionDbModel.Relationship6" FromRole="Group" ToRole="StudyForm" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+          </Key>
+          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="ChairId" Type="Int32" Nullable="false" />
+          <Property Name="SpecialityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecialityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Chair" Relationship="StudyDirectionDbModel.Relationship2" FromRole="Speciality" ToRole="Chair" />
+          <NavigationProperty Name="StudyDirections" Relationship="StudyDirectionDbModel.Relationship3" FromRole="Speciality" ToRole="StudyDirection" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+            <PropertyRef Name="DirectionId" />
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="StudentBookId" />
+            <PropertyRef Name="Form" />
+          </Key>
+          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="ChairId" Type="Int32" Nullable="false" />
+          <Property Name="SpecialityId" Type="Int32" Nullable="false" />
+          <Property Name="DirectionId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="StudentBookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AverageMark" Type="Int32" />
+          <Property Name="Form" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Group" Relationship="StudyDirectionDbModel.Relationship5" FromRole="Student" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="StudyDirection">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ChairId" />
+            <PropertyRef Name="SpecialityId" />
+            <PropertyRef Name="DirectionId" />
+          </Key>
+          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="ChairId" Type="Int32" Nullable="false" />
+          <Property Name="SpecialityId" Type="Int32" Nullable="false" />
+          <Property Name="DirectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudyDirectionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Groups" Relationship="StudyDirectionDbModel.Relationship4" FromRole="StudyDirection" ToRole="Group" />
+          <NavigationProperty Name="Speciality" Relationship="StudyDirectionDbModel.Relationship3" FromRole="StudyDirection" ToRole="Speciality" />
+        </EntityType>
+        <EntityType Name="StudyForm">
+          <Key>
+            <PropertyRef Name="Form" />
+          </Key>
+          <Property Name="Form" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Groups" Relationship="StudyDirectionDbModel.Relationship6" FromRole="StudyForm" ToRole="Group" />
+        </EntityType>
+        <Association Name="Relationship1">
+          <End Type="StudyDirectionDbModel.Faculty" Role="Faculty" Multiplicity="1" />
+          <End Type="StudyDirectionDbModel.Chair" Role="Chair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Chair">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship2">
+          <End Type="StudyDirectionDbModel.Chair" Role="Chair" Multiplicity="1" />
+          <End Type="StudyDirectionDbModel.Speciality" Role="Speciality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chair">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+            </Principal>
+            <Dependent Role="Speciality">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship4">
+          <End Type="StudyDirectionDbModel.StudyDirection" Role="StudyDirection" Multiplicity="1" />
+          <End Type="StudyDirectionDbModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyDirection">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship5">
+          <End Type="StudyDirectionDbModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="StudyDirectionDbModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+              <PropertyRef Name="GroupId" />
+              <PropertyRef Name="Form" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+              <PropertyRef Name="DirectionId" />
+              <PropertyRef Name="GroupId" />
+              <PropertyRef Name="Form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship6">
+          <End Type="StudyDirectionDbModel.StudyForm" Role="StudyForm" Multiplicity="1" />
+          <End Type="StudyDirectionDbModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudyForm">
+              <PropertyRef Name="Form" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="Form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relationship3">
+          <End Type="StudyDirectionDbModel.Speciality" Role="Speciality" Multiplicity="1" />
+          <End Type="StudyDirectionDbModel.StudyDirection" Role="StudyDirection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+            </Principal>
+            <Dependent Role="StudyDirection">
+              <PropertyRef Name="FacultyId" />
+              <PropertyRef Name="ChairId" />
+              <PropertyRef Name="SpecialityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StudyDirectionDbModelContainer" CdmEntityContainer="StudyDirectionDbEntities1">
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chairs">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.Chair">
+              <MappingFragment StoreEntitySet="Chair">
+                <ScalarProperty Name="ChairName" ColumnName="ChairName" />
+                <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Form" ColumnName="Form" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialities">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.Speciality">
+              <MappingFragment StoreEntitySet="Speciality">
+                <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Form" ColumnName="Form" />
+                <ScalarProperty Name="AverageMark" ColumnName="AverageMark" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="StudentBookId" ColumnName="StudentBookId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudyDirections">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.StudyDirection">
+              <MappingFragment StoreEntitySet="StudyDirection">
+                <ScalarProperty Name="StudyDirectionName" ColumnName="StudyDirectionName" />
+                <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudyForms">
+            <EntityTypeMapping TypeName="StudyDirectionDbModel.StudyForm">
+              <MappingFragment StoreEntitySet="StudyForm">
+                <ScalarProperty Name="Form" ColumnName="Form" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<StudyDirectionDbWebApp.Models.Student>
+
+@{
+    ViewBag.Title = "Список";
+}
+
+<p>
+    @Html.ActionLink("Добавить", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Фамилия")
+        </th>
+        <th>
+            @Html.DisplayName("Имя")
+        </th>
+        <th>
+            @Html.DisplayName("Отчество")
+        </th>
+        <th>
+            @Html.DisplayName("Средний балл")
+        </th>
+        <th>
+            @Html.DisplayName("Форма обучения")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patronymic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AverageMark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group.Form)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id = item.StudentBookId }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Подробнее", "Details", new { id = item.StudentBookId }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Удалить", "Delete", new { id = item.StudentBookId }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
