@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace StudyDirectionDbWebApp.Models
 {
     using System;
@@ -23,7 +21,6 @@ namespace StudyDirectionDbWebApp.Models
     
         public int FacultyId { get; set; }
         public int ChairId { get; set; }
-        [MaxLength(50)]
         public string ChairName { get; set; }
     
         public virtual Faculty Faculty { get; set; }

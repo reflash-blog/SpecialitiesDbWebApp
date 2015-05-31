@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace StudyDirectionDbWebApp.Models
 {
     using System;
@@ -25,7 +23,6 @@ namespace StudyDirectionDbWebApp.Models
         public int ChairId { get; set; }
         public int SpecialityId { get; set; }
         public int DirectionId { get; set; }
-        [MaxLength(50)]
         public string StudyDirectionName { get; set; }
     
         public virtual ICollection<Group> Groups { get; set; }

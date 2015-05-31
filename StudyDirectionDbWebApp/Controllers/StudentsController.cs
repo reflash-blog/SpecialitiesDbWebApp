@@ -62,6 +62,9 @@ namespace StudyDirectionDbWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "FacultyId,ChairId,SpecialityId,DirectionId,GroupId,StudentBookId,Surname,Name,Patronymic,AverageMark,Form")] Student student)
         {
+            // Fix not supported exception issue
+            student.Form = "";
+
             if (ModelState.IsValid)
             {
                 db.Students.Add(student);

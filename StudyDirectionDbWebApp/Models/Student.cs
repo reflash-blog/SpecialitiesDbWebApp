@@ -7,9 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace StudyDirectionDbWebApp.Models
 {
     using System;
@@ -22,14 +19,11 @@ namespace StudyDirectionDbWebApp.Models
         public int SpecialityId { get; set; }
         public int DirectionId { get; set; }
         public int GroupId { get; set; }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StudentBookId { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
         public string Patronymic { get; set; }
         public Nullable<int> AverageMark { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Form { get; set; }
     
         public virtual Group Group { get; set; }
