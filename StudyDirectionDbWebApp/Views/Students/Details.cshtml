@@ -1,17 +1,15 @@
 ﻿@model StudyDirectionDbWebApp.Models.Student
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Подробнее";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>Student</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Surname)
+            @Html.DisplayName("Фамилия")
         </dt>
 
         <dd>
@@ -19,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayName("Имя")
         </dt>
 
         <dd>
@@ -27,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Patronymic)
+            @Html.DisplayName("Отчество")
         </dt>
 
         <dd>
@@ -35,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AverageMark)
+            @Html.DisplayName("Средний балл")
         </dt>
 
         <dd>
@@ -43,7 +41,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Group.Form)
+            @Html.DisplayName("Форма обучения")
         </dt>
 
         <dd>
@@ -53,6 +51,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.StudentBookId }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-primary" })
 </p>

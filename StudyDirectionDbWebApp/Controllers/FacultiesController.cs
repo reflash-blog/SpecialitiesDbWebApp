@@ -60,7 +60,7 @@ namespace StudyDirectionDbWebApp.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] Faculty faculty)
+        public async Task<ActionResult> Create([Bind(Include = "FacultyId,Name")] Faculty faculty)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace StudyDirectionDbWebApp.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] Faculty faculty)
+        public async Task<ActionResult> Edit([Bind(Include = "FacultyId,Name")] Faculty faculty)
         {
             if (ModelState.IsValid)
             {
