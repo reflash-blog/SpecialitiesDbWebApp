@@ -178,6 +178,7 @@
     <Compile Include="Controllers\ChairsController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -474,6 +475,12 @@
     <Content Include="Scripts\Plugins\LICENSE" />
     <Content Include="Views\Shared\LastQueries.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
+    <None Include="Views\Help\ExecutionOrder.cshtml" />
+    <None Include="Views\Help\FunctionsDescription.cshtml" />
+    <None Include="Views\Help\OperatorMessages.cshtml" />
+    <None Include="Views\Help\Purpose.cshtml" />
+    <None Include="Views\Help\Running.cshtml" />
+    <None Include="Views\Help\RuntimeConditions.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
